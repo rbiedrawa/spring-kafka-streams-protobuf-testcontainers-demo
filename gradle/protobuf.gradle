@@ -1,0 +1,21 @@
+apply plugin: 'com.google.protobuf'
+
+sourceSets {
+    main {
+        java {
+            srcDir "${project.buildDir}/generated/source/proto/main/grpc"
+            srcDir "${project.buildDir}/generated/source/proto/main/java"
+        }
+    }
+}
+
+protobuf {
+    protoc { artifact = 'com.google.protobuf:protoc:3.5.1' }
+    plugins {
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.36.0" }
+    }
+
+    generateProtoTasks {
+        all()*.plugins { grpc {} }
+    }
+}
