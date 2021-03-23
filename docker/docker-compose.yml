@@ -1,0 +1,31 @@
+---
+version: '2'
+services:
+  fast-data-dev:
+    image: landoop/fast-data-dev
+    ports:
+      - "2181:2181" # ZooKeeper
+      - "3030:3030" # UI
+      - "8081-8083:8081-8083" # Schema Registry, Kafka REST Proxy, Kafka Connect Distributed
+      - "9581-9585:9581-9585" # JMX
+      - "9092:9092" # Kafka Broker
+    environment:
+      ADV_HOST: kubernetes.docker.internal
+      SAMPLEDATA: 0
+      RUNTESTS: 0
+      RUNNING_SAMPLEDATA: 0
+  kafkahq:
+    image: tchiotludo/kafkahq
+    environment:
+      KAFKAHQ_CONFIGURATION: |
+        kafkahq:
+          connections:
+            docker-kafka-server:
+              properties:
+                bootstrap.servers: "fast-data-dev:9092"
+              schema-registry:
+                url: "http://fast-data-dev:8081"
+              connect:
+                url: "http://fast-data-dev:8083"
+    ports:
+      - 3031:8080
