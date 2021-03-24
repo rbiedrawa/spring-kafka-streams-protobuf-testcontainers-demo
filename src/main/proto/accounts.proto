@@ -9,20 +9,21 @@ option java_multiple_files = true;
 option java_package = "com.rbiedrawa.app.proto.accounts";
 
 service AccountService {
-    rpc SignUp (SignUpRequest) returns (Account) {}
+    rpc Create (CreateAccountRequest) returns (Account) {}
 }
 
-message SignUpRequest {
+message CreateAccountRequest {
     string email = 1;
     string countryCode = 2;
     AccountType type = 3;
 }
 
 message Account {
-    string email = 1;
-    string countryCode = 2;
-    AccountType type = 3;
-    google.protobuf.Timestamp createdDate = 4;
+    string id = 1;
+    string email = 2;
+    string countryCode = 3;
+    AccountType type = 4;
+    google.protobuf.Timestamp createdDate = 5;
 }
 
 enum AccountType {

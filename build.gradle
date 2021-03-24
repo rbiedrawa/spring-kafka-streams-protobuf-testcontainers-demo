@@ -27,6 +27,9 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven {
+		url "https://packages.confluent.io/maven"
+	}
 }
 
 ext {
@@ -44,11 +47,16 @@ dependencies {
 	// Kafka
 	implementation 'org.springframework.kafka:spring-kafka'
 	implementation 'org.apache.kafka:kafka-streams'
+	implementation "io.confluent:kafka-streams-protobuf-serde:6.0.1"
+
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
 	testImplementation 'org.testcontainers:kafka'
 
 	// gRPC
-	compile 'io.github.lognet:grpc-spring-boot-starter:4.4.5'
+	implementation 'io.github.lognet:grpc-spring-boot-starter:4.4.5'
+
+	// Faker - just for demo
+	implementation 'com.github.javafaker:javafaker:1.0.2'
 
 	// Test core
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
