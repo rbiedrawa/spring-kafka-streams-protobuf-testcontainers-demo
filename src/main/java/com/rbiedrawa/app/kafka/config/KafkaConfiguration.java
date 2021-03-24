@@ -1,5 +1,7 @@
 package com.rbiedrawa.app.kafka.config;
 
+import java.util.Map;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -16,6 +18,9 @@ public class KafkaConfiguration {
 
 	@Bean
 	NewTopic ordersTopic() {
-		return TopicBuilder.name(TOPIC_ACCOUNT_EVENTS).partitions(6).build();
+		return TopicBuilder.name(TOPIC_ACCOUNT_EVENTS)
+						   .partitions(6)
+						   .configs(Map.of("confluent.value.subject.name.strategy", "io.confluent.kafka.serializers.subject.RecordNameStrategy"))
+						   .build();
 	}
 }

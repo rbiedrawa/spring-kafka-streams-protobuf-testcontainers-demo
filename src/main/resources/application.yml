@@ -24,7 +24,9 @@ spring:
       derive.type: true
       auto-register-schemas: true  # don't use in production, it's better to register and control schema using terraform
     streams:
-      application-id: "accounts-aggregator"
+      properties:
+        processing.guarantee: exactly_once
+        commit.interval.ms: 50
 
 management:
   endpoints:
