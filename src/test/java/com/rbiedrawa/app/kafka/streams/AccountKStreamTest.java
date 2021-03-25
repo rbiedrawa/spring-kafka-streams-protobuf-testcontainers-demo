@@ -12,7 +12,9 @@ import io.confluent.kafka.streams.serdes.protobuf.KafkaProtobufSerde;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.TestInputTopic;
+import org.apache.kafka.streams.TopologyTestDriver;
 import org.apache.kafka.streams.state.KeyValueStore;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,13 +23,13 @@ class AccountKStreamTest {
 	private final KafkaProtobufSerde<Account> accountSerde = TestSerdes.from(Account.class);
 	private final Serde<String> keySerde = Serdes.String();
 
+	private TopologyTestDriver testDriver;
 	private TestInputTopic<String, Account> accountInputTopic;
 	private KeyValueStore<String, Account> accountStateStore;
 
 	@BeforeEach
 	void setup() {
-		var testDriver = TopologyTestDriverFactory.create(sb ->
-															  new AccountKStream(accountSerde).accountAggregatorStream(sb));
+		testDriver = TopologyTestDriverFactory.create(sb -> new AccountKStream(accountSerde).accountAggregatorStream(sb));
 
 		accountInputTopic = testDriver.createInputTopic(TOPIC_ACCOUNT_EVENTS, keySerde.serializer(), accountSerde.serializer());
 		accountStateStore = testDriver.getKeyValueStore(AccountKStream.ACCOUNT_STORE);
@@ -43,6 +45,15 @@ class AccountKStreamTest {
 
 		// Then
 		assertThat(accountStateStore.get(account.getId())).isEqualTo(account);
+	}
+
+	@AfterEach
+	void tearDown() {
+		try {
+			this.testDriver.close();
+		} catch (final RuntimeException ex) {
+			// https://issues.apache.org/jira/browse/KAFKA-6647
+		}
 	}
 
 }

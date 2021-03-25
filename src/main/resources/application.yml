@@ -23,7 +23,8 @@ spring:
     streams:
       properties:
         processing.guarantee: exactly_once
-        commit.interval.ms: 50
+        commit.interval.ms: 100
+#        commit.interval.ms: 0 # turn off caching
 
 management:
   endpoints:
