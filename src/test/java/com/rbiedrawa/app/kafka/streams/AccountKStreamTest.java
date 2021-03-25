@@ -26,8 +26,8 @@ class AccountKStreamTest {
 
 	@BeforeEach
 	void setup() {
-		var testDriver = TopologyTestDriverFactory.create(streamsBuilder ->
-															  new AccountKStream(accountSerde).accounts(streamsBuilder));
+		var testDriver = TopologyTestDriverFactory.create(sb ->
+															  new AccountKStream(accountSerde).accountAggregatorStream(sb));
 
 		accountInputTopic = testDriver.createInputTopic(TOPIC_ACCOUNT_EVENTS, keySerde.serializer(), accountSerde.serializer());
 		accountStateStore = testDriver.getKeyValueStore(AccountKStream.ACCOUNT_STORE);

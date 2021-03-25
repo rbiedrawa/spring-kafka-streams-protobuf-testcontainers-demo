@@ -34,7 +34,7 @@ public class AccountsPerCountryKStream {
 
 	@Bean(name = STREAMS_BUILDER_BEAN_NAME)
 	StreamsBuilderFactoryBean streamsBuilderFactoryBean(KafkaProperties defaultProperties) throws Exception {
-		return StreamsFactory.newKStreamConfigurationFrom("accounts-per-country_kstream", defaultProperties);
+		return StreamsFactory.newKStreamConfigurationFrom("accounts-per-country", defaultProperties);
 	}
 
 	@Bean

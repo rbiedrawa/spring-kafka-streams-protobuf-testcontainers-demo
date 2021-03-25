@@ -31,11 +31,11 @@ public class AccountKStream {
 
 	@Bean(name = STREAMS_BUILDER_BEAN_NAME)
 	StreamsBuilderFactoryBean streamsBuilderFactoryBean(KafkaProperties defaultProperties) throws Exception {
-		return StreamsFactory.newKStreamConfigurationFrom("accounts-aggregator", defaultProperties);
+		return StreamsFactory.newKStreamConfigurationFrom("account-aggregator", defaultProperties);
 	}
 
 	@Bean
-	KTable<String, Account> accounts(@Qualifier(AccountKStream.STREAMS_BUILDER_BEAN_NAME) StreamsBuilder builder) {
+	KTable<String, Account> accountAggregatorStream(@Qualifier(AccountKStream.STREAMS_BUILDER_BEAN_NAME) StreamsBuilder builder) {
 		return builder.table(TOPIC_ACCOUNT_EVENTS, Consumed.with(Serdes.String(), accountSerde), Materialized.as(ACCOUNT_STORE));
 	}
 
