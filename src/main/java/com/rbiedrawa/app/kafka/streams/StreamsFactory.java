@@ -1,4 +1,4 @@
-package com.rbiedrawa.app.kafka;
+package com.rbiedrawa.app.kafka.streams;
 
 import java.util.Map;
 

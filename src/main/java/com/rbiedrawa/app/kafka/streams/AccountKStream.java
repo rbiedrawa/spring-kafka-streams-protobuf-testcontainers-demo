@@ -1,7 +1,6 @@
-package com.rbiedrawa.app.kafka;
+package com.rbiedrawa.app.kafka.streams;
 
 
-import static com.rbiedrawa.app.kafka.config.KafkaConfiguration.ACCOUNT_STORE;
 import static com.rbiedrawa.app.kafka.config.KafkaConfiguration.TOPIC_ACCOUNT_EVENTS;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +25,7 @@ import org.apache.kafka.streams.kstream.Materialized;
 @RequiredArgsConstructor
 public class AccountKStream {
 	public static final String STREAMS_BUILDER_BEAN_NAME = "accountAggregateStreamsFactory";
+	public static final String ACCOUNT_STORE = "accounts.store";
 
 	private final KafkaProtobufSerde<Account> accountSerde;
 

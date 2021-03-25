@@ -1,19 +1,13 @@
-package com.rbiedrawa.app.kafka;
+package com.rbiedrawa.app.kafka.streams;
 
 import static com.rbiedrawa.app.kafka.config.KafkaConfiguration.TOPIC_ACCOUNT_EVENTS;
 import static org.assertj.core.api.Assertions.*;
 
-import java.time.Instant;
-import java.util.UUID;
-
-import com.rbiedrawa.app.kafka.config.KafkaConfiguration;
+import com.rbiedrawa.app.kafka.AccountTestFactory;
 import com.rbiedrawa.app.kafka.utils.TestSerdes;
 import com.rbiedrawa.app.kafka.utils.TopologyTestDriverFactory;
 import com.rbiedrawa.app.proto.accounts.Account;
-import com.rbiedrawa.app.proto.accounts.AccountType;
 
-import com.github.javafaker.Faker;
-import com.google.protobuf.Timestamp;
 import io.confluent.kafka.streams.serdes.protobuf.KafkaProtobufSerde;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;
@@ -33,41 +27,22 @@ class AccountKStreamTest {
 	@BeforeEach
 	void setup() {
 		var testDriver = TopologyTestDriverFactory.create(streamsBuilder ->
-															  new AccountKStream(accountSerde).accounts(streamsBuilder)
-														 );
+															  new AccountKStream(accountSerde).accounts(streamsBuilder));
 
-		accountInputTopic = testDriver.createInputTopic(TOPIC_ACCOUNT_EVENTS,
-														keySerde.serializer(),
-														accountSerde.serializer());
-
-		accountStateStore = testDriver.getKeyValueStore(KafkaConfiguration.ACCOUNT_STORE);
+		accountInputTopic = testDriver.createInputTopic(TOPIC_ACCOUNT_EVENTS, keySerde.serializer(), accountSerde.serializer());
+		accountStateStore = testDriver.getKeyValueStore(AccountKStream.ACCOUNT_STORE);
 	}
 
 	@Test
 	void should_materialize_account_when_account_event_received() {
 		// Given
-		var account = randomAccount();
+		var account = AccountTestFactory.randomAccount();
 
 		// When
 		accountInputTopic.pipeInput(account.getId(), account);
 
 		// Then
 		assertThat(accountStateStore.get(account.getId())).isEqualTo(account);
-	}
-
-
-	private Account randomAccount() {
-		Faker faker = new Faker();
-
-		Instant now = Instant.now();
-
-		return Account.newBuilder()
-					  .setId(UUID.randomUUID().toString())
-					  .setCountryCode(faker.country().countryCode2())
-					  .setEmail(faker.internet().emailAddress())
-					  .setType(AccountType.PREMIUM)
-					  .setCreatedDate(Timestamp.newBuilder().setSeconds(now.getEpochSecond()).setNanos(now.getNano()).build())
-					  .build();
 	}
 
 }

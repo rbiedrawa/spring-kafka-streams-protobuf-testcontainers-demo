@@ -19,10 +19,7 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     properties:
       schema.registry.url: ${app.kafka.schema-registry.url}
-      #  https://docs.confluent.io/platform/6.0.0/schema-registry/schema-validation.html#change-the-subject-naming-strategy-for-a-topic
-      value.subject.name.strategy: io.confluent.kafka.serializers.subject.RecordNameStrategy
-      derive.type: true
-      auto-register-schemas: true  # don't use in production, it's better to register and control schema using terraform
+      auto-register-schemas: true  # don't use in production, it's better to register and control schema using deployment pipelines
     streams:
       properties:
         processing.guarantee: exactly_once
