@@ -31,8 +31,7 @@ public class AccountKStream {
 
 	@Bean(name = STREAMS_BUILDER_BEAN_NAME)
 	StreamsBuilderFactoryBean streamsBuilderFactoryBean(KafkaProperties defaultProperties) throws Exception {
-		String applicationId = "accounts-aggregator";
-		return StreamsFactory.from(defaultProperties, applicationId);
+		return StreamsFactory.newKStreamConfigurationFrom("accounts-aggregator", defaultProperties);
 	}
 
 	@Bean

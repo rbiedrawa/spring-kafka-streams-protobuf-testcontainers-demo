@@ -13,9 +13,9 @@ public final class StreamsFactory {
 	private StreamsFactory() {
 	}
 
-	public static StreamsBuilderFactoryBean from(KafkaProperties defaultProperties, String newApplicationId) throws Exception {
+	public static StreamsBuilderFactoryBean newKStreamConfigurationFrom(String applicationId, KafkaProperties defaultProperties) throws Exception {
 		Map<String, Object> streamsProperties = defaultProperties.buildStreamsProperties();
-		streamsProperties.put(StreamsConfig.APPLICATION_ID_CONFIG, newApplicationId);
+		streamsProperties.put(StreamsConfig.APPLICATION_ID_CONFIG, applicationId);
 
 		var streamsConfig = new KafkaStreamsConfiguration(streamsProperties);
 		StreamsBuilderFactoryBean streamsBuilderFactoryBean = new StreamsBuilderFactoryBean(streamsConfig);
