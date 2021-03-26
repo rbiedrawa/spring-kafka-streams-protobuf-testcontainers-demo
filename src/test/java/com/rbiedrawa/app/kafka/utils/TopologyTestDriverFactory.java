@@ -1,7 +1,5 @@
 package com.rbiedrawa.app.kafka.utils;
 
-import static org.apache.kafka.streams.StreamsConfig.BOOTSTRAP_SERVERS_CONFIG;
-
 import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
@@ -12,7 +10,7 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.TopologyTestDriver;
 
-// TODO: Refactor to TopologyTest abstract
+// TODO: Refactor to TopologyTest
 public abstract class TopologyTestDriverFactory {
 
 	private static final Properties DEFAULT_TOPOLOGY_CONFIG = defaultTestTopologyConfig();
@@ -35,7 +33,7 @@ public abstract class TopologyTestDriverFactory {
 	private static Properties defaultTestTopologyConfig() {
 		Properties config = new Properties();
 		config.putAll(Map.of(StreamsConfig.APPLICATION_ID_CONFIG, "topology-test-" + UUID.randomUUID().toString(),
-							 BOOTSTRAP_SERVERS_CONFIG, "ignored:9092"));
+							 StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "ignored:9092"));
 		return config;
 	}
 

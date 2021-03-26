@@ -1,15 +1,8 @@
-app:
-  kafka:
-    bootstrap-servers: "kubernetes.docker.internal:9092"
-    schema-registry:
-      url: "http://kubernetes.docker.internal:8081"
-
 spring:
   application:
     name: account-service
   kafka:
-    bootstrap-servers:
-      - ${app.kafka.bootstrap-servers}
+    bootstrap-servers: "${APP_KAFKA_BOOTSTRAP_SERVERS:kubernetes.docker.internal:9092}"
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufSerializer
@@ -18,7 +11,7 @@ spring:
       value-deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     properties:
-      schema.registry.url: ${app.kafka.schema-registry.url}
+      schema.registry.url: "${APP_SCHEMA_REGISTRY_URL:http://kubernetes.docker.internal:8081}"
       auto-register-schemas: true  # don't use in production, it's better to register and control schema using deployment pipelines
     streams:
       properties:

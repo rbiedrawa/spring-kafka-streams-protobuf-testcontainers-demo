@@ -12,11 +12,12 @@ import org.apache.kafka.clients.admin.NewTopic;
 public class KafkaConfiguration {
 
 	public static final String TOPIC_ACCOUNT_EVENTS = "account.events";
+	public static final int DEFAULT_PARTITION_COUNT = 6;
 
 	@Bean
 	NewTopic ordersTopic() {
 		return TopicBuilder.name(TOPIC_ACCOUNT_EVENTS)
-						   .partitions(6)
+						   .partitions(DEFAULT_PARTITION_COUNT)
 						   .build();
 	}
 }

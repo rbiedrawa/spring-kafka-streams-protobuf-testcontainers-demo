@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.UUID;
 import java.util.stream.IntStream;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import com.google.protobuf.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@Profile("dummy_data_gen")
 @Slf4j
 @Service
 @AllArgsConstructor
