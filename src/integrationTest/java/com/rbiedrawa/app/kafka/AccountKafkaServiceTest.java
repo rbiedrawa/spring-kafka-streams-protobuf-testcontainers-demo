@@ -18,7 +18,7 @@ import org.springframework.kafka.listener.MessageListener;
 import org.springframework.kafka.test.utils.ContainerTestUtils;
 import org.springframework.kafka.test.utils.KafkaTestUtils;
 
-import com.rbiedrawa.app.AbstractBaseIT;
+import com.rbiedrawa.app.IntegrationTest;
 import com.rbiedrawa.app.api.AccountService;
 import com.rbiedrawa.app.proto.accounts.Account;
 import com.rbiedrawa.app.proto.accounts.AccountType;
@@ -31,7 +31,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class AccountKafkaServiceIT extends AbstractBaseIT {
+class AccountKafkaServiceTest extends IntegrationTest {
 
 	@Autowired
 	private KafkaProtobufSerde<Account> accountSerde;

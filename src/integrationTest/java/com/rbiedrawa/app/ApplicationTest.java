@@ -8,7 +8,7 @@ import org.springframework.core.env.Environment;
 import org.junit.jupiter.api.Test;
 
 
-class ApplicationIT extends AbstractBaseIT {
+class ApplicationTest extends IntegrationTest {
 
 	@Autowired
 	private Environment environment;

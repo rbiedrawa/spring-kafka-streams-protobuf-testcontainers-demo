@@ -4,7 +4,7 @@ import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.utility.DockerImageName;
 
-public abstract class AbstractContainerBaseIT {
+public abstract class AbstractContainerBaseTest {
 	private static final KafkaContainer KAFKA_CONTAINER;
 
 	private static final SchemaRegistryContainer SCHEMA_REGISTRY_CONTAINER;
