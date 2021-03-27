@@ -44,6 +44,7 @@ public class AccountKafkaService implements AccountService {
 
 	@Override
 	public Optional<Account> findById(String accountId) {
+		log.info("Find by account by id: {}", accountId);
 		ReadOnlyKeyValueStore<String, Account> store = accountStreamsBuilder.getKafkaStreams()
 																			.store(fromNameAndType(AccountKStream.ACCOUNT_STORE, keyValueStore()));
 		return Optional.ofNullable(store.get(accountId));
@@ -51,6 +52,7 @@ public class AccountKafkaService implements AccountService {
 
 	@Override
 	public Long countByCountryCode(String countryCode) {
+		log.info("Count by countryCode: {}", countryCode);
 		ReadOnlyKeyValueStore<String, Long> store = accountsPerCountryStreamsBuilder.getKafkaStreams()
 																					.store(fromNameAndType(AccountsPerCountryKStream.ACCOUNTS_PER_COUNTRY_STORE, keyValueStore()));
 		return Optional.ofNullable(store.get(countryCode.toLowerCase())).orElse(0L);

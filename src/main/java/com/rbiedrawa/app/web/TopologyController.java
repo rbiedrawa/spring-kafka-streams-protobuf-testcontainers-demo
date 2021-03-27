@@ -3,6 +3,7 @@ package com.rbiedrawa.app.web;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -29,8 +30,8 @@ import org.apache.kafka.streams.TopologyDescription;
 public class TopologyController {
 	private final List<StreamsBuilderFactoryBean> streamsBuilders;
 
-	@GetMapping(produces = MediaType.TEXT_PLAIN_VALUE)
-	ResponseEntity<List<String>> findAll() {
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	ResponseEntity<Map<String, List<String>>> findAll() {
 		List<String> applicationIds = streamsBuilders.stream()
 													 .map(StreamsBuilderFactoryBean::getStreamsConfiguration)
 													 .filter(Objects::nonNull)
@@ -38,7 +39,7 @@ public class TopologyController {
 													 .filter(Objects::nonNull)
 													 .map(String.class::cast)
 													 .collect(toList());
-		return ResponseEntity.ok(applicationIds);
+		return ResponseEntity.ok(Map.of("topologies", applicationIds));
 	}
 
 	@GetMapping(value = "{applicationId}", produces = MediaType.TEXT_PLAIN_VALUE)
