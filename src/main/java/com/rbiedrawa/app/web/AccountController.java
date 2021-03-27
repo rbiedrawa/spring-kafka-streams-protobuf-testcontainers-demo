@@ -33,7 +33,7 @@ public class AccountController {
 							 .orElseGet(() -> ResponseEntity.notFound().build());
 	}
 
-	@GetMapping(value = "/statistics/accounts/{countryCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/statistics/countries/{countryCode}/accounts", produces = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<Map<String, Long>> accountsPerCountry(@PathVariable String countryCode) {
 		return ResponseEntity.ok(Map.of("count", accountService.countByCountryCode(countryCode)));
 	}

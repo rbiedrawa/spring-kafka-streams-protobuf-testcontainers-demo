@@ -1,5 +1,7 @@
 # Spring, Kafka Streams, gRPC with TestContainers - demo application
 
+Sample 'Account Service' application that allows users to sign up and retrieve account details and statistics.
+
 This demo was build for showcasing how to run multiple 'Kafka Streams' instances (with different consumer groups) inside single Spring Boot application.
 
 Patterns, technologies, concepts demonstrated here:
@@ -21,9 +23,9 @@ Patterns, technologies, concepts demonstrated here:
 
 ## Table of Content
 
-## Architecture
+## Application diagram
 
-![architecture-diagram](./_docs/img/architecture.png)
+![application-diagram](./_docs/img/architecture.png)
 
 ## Getting Started
 
@@ -94,13 +96,13 @@ Patterns, technologies, concepts demonstrated here:
       }
       ```
 * Test interactive queries using REST endpoints.
-    * Get account details from `accounts.store` state store:
+    * Get account details from `accounts.store` state store (use account id retrieved before):
       ```shell
         curl -X GET --location "http://localhost:8080/api/v1/accounts/519faeb7-ccdf-49dd-95a4-3e2a6ac8ad13"
       ```
-    * Get account statistics (accounts per country):
+    * Get account statistics for 'GB' countryCode:
       ```shell
-      curl -X GET --location "http://localhost:8080/api/v1/statistics/accounts/GB"
+      curl -X GET --location "http://localhost:8080/api/v1/statistics/countries/GB/accounts"
       ```
 
 * Analise kafka streams topology:
@@ -116,8 +118,14 @@ Patterns, technologies, concepts demonstrated here:
 
 ### Testing Kafka Stream
 
-* Unit Test (TopologyTestDriver) examples may be found under [src/test/](./src/test/java/com/rbiedrawa/app/kafka/streams).
-* Integration Test (Testcontainers) examples may be found under [src/integrationTest/](./src/integrationTest/java/com/rbiedrawa/app).
+* Unit test (TopologyTestDriver) examples may be found under [src/test/](./src/test/java/com/rbiedrawa/app/kafka/streams).
+* Integration test (Testcontainers) examples may be found under [src/integrationTest/](./src/integrationTest/java/com/rbiedrawa/app).
+
+## Deployment
+
+### Docker
+
+Docker compose file with instructions are kept in [docker](deployment/docker) subdirectory.
 
 ## References
 

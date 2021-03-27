@@ -58,7 +58,7 @@ services:
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
 
   account-service:
-    image: com.rbiedrawa.spring.kafka.grpc/spring-kafka-streams-grpc:0.0.1-SNAPSHOT
+    image: rbiedrawa/spring-kafka-streams-protobuf-testcontainers-demo:0.0.1-SNAPSHOT
     container_name: account-service
     networks:
       - dev

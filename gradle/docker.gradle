@@ -1,5 +1,6 @@
 bootBuildImage {
-	imageName = "${project.group}/${project.name}:${project.version}"
+//	imageName = "${project.group}/${project.name}:${project.version}"
+	imageName = "rbiedrawa/${project.name}:${project.version}"
 }
 
 task displayDockerImageName {
