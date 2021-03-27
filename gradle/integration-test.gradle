@@ -1,31 +1,43 @@
+/* Required plugins:
+*  * idea
+*  * com.adarshr.test-logger
+*/
+
 sourceSets {
-    integrationTest {
-        compileClasspath += sourceSets.main.output + sourceSets.test.output
-        runtimeClasspath += sourceSets.main.output + sourceSets.test.output
-    }
+	integrationTest {
+		compileClasspath += sourceSets.main.output + sourceSets.test.output
+		runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+	}
+}
+
+idea {
+	module {
+		testSourceDirs += sourceSets.integrationTest.java.srcDirs
+		testResourceDirs += sourceSets.integrationTest.resources.srcDirs
+		scopes.TEST.plus += [configurations.integrationTestCompile]
+	}
 }
 
 configurations {
-    integrationTestImplementation.extendsFrom testImplementation
-    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+	integrationTestImplementation.extendsFrom testImplementation
+	integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 task integrationTest(type: Test) {
-    description = 'Runs integration tests.'
-    group = 'verification'
+	description = 'Runs integration tests.'
+	group = 'verification'
 
-    testClassesDirs = sourceSets.integrationTest.output.classesDirs
-    classpath = sourceSets.integrationTest.runtimeClasspath
-    shouldRunAfter test
+	testClassesDirs = sourceSets.integrationTest.output.classesDirs
+	classpath = sourceSets.integrationTest.runtimeClasspath
+	shouldRunAfter test
 }
 
 integrationTest {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
 
 check.dependsOn integrationTest
 
-// Require to apply plugin:
 testlogger {
-    theme 'mocha' // project level
+	theme 'mocha' // project level
 }
