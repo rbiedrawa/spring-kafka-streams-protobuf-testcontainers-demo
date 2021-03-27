@@ -9,8 +9,8 @@ import com.rbiedrawa.app.containers.AbstractContainerBaseTest;
 
 import org.junit.jupiter.api.Tag;
 
-@Tag("integration")
-@ActiveProfiles("integration-test")
+@Tag("integrationTest")
+@ActiveProfiles("integrationTest")
 @SpringBootTest
 public abstract class IntegrationTest extends AbstractContainerBaseTest {
 
