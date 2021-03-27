@@ -95,15 +95,15 @@ Patterns, technologies, concepts demonstrated here:
         }
       }
       ```
-* Test interactive queries using REST endpoints.
-    * Get account details from `accounts.store` state store (use account id retrieved before):
-      ```shell
-        curl -X GET --location "http://localhost:8080/api/v1/accounts/519faeb7-ccdf-49dd-95a4-3e2a6ac8ad13"
-      ```
-    * Get account statistics for 'GB' countryCode:
-      ```shell
-      curl -X GET --location "http://localhost:8080/api/v1/statistics/countries/GB/accounts"
-      ```
+    * Test interactive queries using REST endpoints.
+        * Get account details from `accounts.store` state store (use account id retrieved before):
+          ```shell
+            curl -X GET --location "http://localhost:8080/api/v1/accounts/519faeb7-ccdf-49dd-95a4-3e2a6ac8ad13"
+          ```
+        * Get account statistics for 'GB' countryCode:
+          ```shell
+          curl -X GET --location "http://localhost:8080/api/v1/statistics/countries/GB/accounts"
+          ```
 
 * Analise kafka streams topology:
     * Get all available topologies.
