@@ -16,12 +16,13 @@ plugins {
 	id 'jacoco'
 }
 
-apply from: 'gradle/integration-test.gradle'
-apply from: 'gradle/protobuf.gradle'
-
 group = 'com.rbiedrawa.spring.kafka.grpc'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+apply from: 'gradle/integration-test.gradle'
+apply from: 'gradle/protobuf.gradle'
+apply from: 'gradle/docker.gradle'
 
 configurations {
 	compileOnly {
@@ -81,8 +82,4 @@ test {
 
 springBoot {
 	buildInfo()
-}
-
-bootBuildImage {
-	imageName = "${project.group}/${project.name}:${project.version}"
 }

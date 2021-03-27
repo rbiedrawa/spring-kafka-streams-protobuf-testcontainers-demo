@@ -1,0 +1,33 @@
+bootBuildImage {
+	imageName = "${project.group}/${project.name}:${project.version}"
+}
+
+task displayDockerImageName {
+	description = 'Displays docker image name for \\\'${project.name}\\\'.'
+	group = 'help'
+
+	doLast {
+		println "Docker image name: ${bootBuildImage.imageName}"
+	}
+}
+
+task displaySampleDockerCompose {
+	description = "Displays docker compose file for \'${project.name}\'."
+	group = 'help'
+
+	doLast {
+		println """
+---
+version: '2'
+services:
+  ${project.name}:
+    image: ${bootBuildImage.imageName}
+    container_name: ${project.name}
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      spring.profiles.active: docker
+"""
+	}
+}
