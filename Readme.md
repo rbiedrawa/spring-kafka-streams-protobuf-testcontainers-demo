@@ -1,14 +1,29 @@
 # Spring, Kafka Streams, gRPC with TestContainers - demo application
 
-Sample 'Account Service' application that allows users to sign up and retrieve account details and statistics.
+Account Service - Spring, Kafka Streams sample application that allows users to Sign up and retrieve account details and statistics.
 
-This demo was build for showcasing how to run multiple 'Kafka Streams' instances (with different consumer groups) inside single Spring Boot application.
+This PoC was build for showcasing how to run **multiple Kafka Streams** instances (with different consumer groups) inside **single Spring Boot application**.
 
-Patterns, technologies, concepts demonstrated here:
+## Table of Content
+
+- [Patterns, technologies, concepts demonstrated here.](#patterns--technologies--concepts-demonstrated-here)
+- [Architecture](#architecture)
+- [Getting Started](#getting-started)
+    * [Prerequisite](#prerequisite)
+    * [Installation](#installation)
+        + [Local](#local)
+    * [Usage](#usage)
+    * [Testing Kafka Stream](#testing-kafka-stream)
+- [Deployment](#deployment)
+    * [Docker](#docker)
+- [References](#references)
+- [License](#license)
+
+## Patterns, technologies, concepts demonstrated here.
 
 * Testcontainers for Kafka streams integration tests.
 * Multiple KStreams inside single boot application.
-* Kafka protobuf integration.  
+* Kafka protobuf integration.
 * Dynamic property binding in Spring Framework.
 * gRPC for handling commands (CreateAccount).
 * gRPC client via BloomRPC application.
@@ -21,11 +36,9 @@ Patterns, technologies, concepts demonstrated here:
 * Faker with scheduling setup for generating dummy data, activated by `dummy_data_gen` spring profile.
 * Custom lombok configuration.
 
-## Table of Content
+## Architecture
 
-## Application diagram
-
-![application-diagram](./_docs/img/architecture.png)
+![architecture](./_docs/img/application-diagram.png)
 
 ## Getting Started
 
