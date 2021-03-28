@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.rbiedrawa.app.api.AccountFactory;
 import com.rbiedrawa.app.api.AccountService;
-import com.rbiedrawa.app.kafka.config.KafkaConfiguration;
+import com.rbiedrawa.app.kafka.config.KafkaTopics;
 import com.rbiedrawa.app.kafka.streams.AccountKStream;
 import com.rbiedrawa.app.kafka.streams.AccountsPerCountryKStream;
 import com.rbiedrawa.app.proto.accounts.Account;
@@ -38,7 +38,7 @@ public class AccountKafkaService implements AccountService {
 	@Override
 	public Account createNew(CreateAccountRequest createAccountRequest) {
 		var newAccount = AccountFactory.from(createAccountRequest);
-		kafkaTemplate.send(KafkaConfiguration.TOPIC_ACCOUNT_EVENTS, newAccount.getId(), newAccount);
+		kafkaTemplate.send(KafkaTopics.ACCOUNTS, newAccount.getId(), newAccount);
 		return newAccount;
 	}
 

@@ -1,14 +1,13 @@
 package com.rbiedrawa.app.kafka.streams;
 
 
-import static com.rbiedrawa.app.kafka.config.KafkaConfiguration.TOPIC_ACCOUNT_EVENTS;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.StreamsBuilderFactoryBean;
 
+import com.rbiedrawa.app.kafka.config.KafkaTopics;
 import com.rbiedrawa.app.proto.accounts.Account;
 
 import io.confluent.kafka.streams.serdes.protobuf.KafkaProtobufSerde;
@@ -41,7 +40,7 @@ public class AccountsPerCountryKStream {
 	KTable<String, Long> accountsPerCountryStream(@Qualifier(
 		AccountsPerCountryKStream.STREAMS_BUILDER_BEAN_NAME) StreamsBuilder builder) {
 
-		return builder.stream(TOPIC_ACCOUNT_EVENTS, Consumed.with(Serdes.String(), accountSerde))
+		return builder.stream(KafkaTopics.ACCOUNTS, Consumed.with(Serdes.String(), accountSerde))
 					  .map((accountId, account) -> KeyValue.pair(account.getCountryCode().toLowerCase(), account.getCountryCode().toLowerCase()))
 					  .groupByKey(Grouped.with(Serdes.String(), Serdes.String()))
 					  .count(Materialized.<String, Long>as(Stores.persistentKeyValueStore(ACCOUNTS_PER_COUNTRY_STORE))

@@ -1,7 +1,5 @@
 package com.rbiedrawa.app.kafka;
 
-import static com.rbiedrawa.app.kafka.config.KafkaConfiguration.DEFAULT_PARTITION_COUNT;
-import static com.rbiedrawa.app.kafka.config.KafkaConfiguration.TOPIC_ACCOUNT_EVENTS;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.HashMap;
@@ -20,6 +18,7 @@ import org.springframework.kafka.test.utils.KafkaTestUtils;
 
 import com.rbiedrawa.app.IntegrationTest;
 import com.rbiedrawa.app.api.AccountService;
+import com.rbiedrawa.app.kafka.config.KafkaTopics;
 import com.rbiedrawa.app.proto.accounts.Account;
 import com.rbiedrawa.app.proto.accounts.AccountType;
 import com.rbiedrawa.app.proto.accounts.CreateAccountRequest;
@@ -47,11 +46,11 @@ class AccountKafkaServiceTest extends IntegrationTest {
 	void setUp() {
 		Map<String, Object> configs = new HashMap<>(KafkaTestUtils.consumerProps(getBootstrapServers(), this.getClass().getSimpleName(), "false"));
 		DefaultKafkaConsumerFactory<String, Account> consumerFactory = new DefaultKafkaConsumerFactory<>(configs, new StringDeserializer(), accountSerde.deserializer());
-		container = new KafkaMessageListenerContainer<>(consumerFactory, new ContainerProperties(TOPIC_ACCOUNT_EVENTS));
+		container = new KafkaMessageListenerContainer<>(consumerFactory, new ContainerProperties(KafkaTopics.ACCOUNTS));
 		records = new LinkedBlockingQueue<>();
 		container.setupMessageListener((MessageListener<String, Account>) records::add);
 		container.start();
-		ContainerTestUtils.waitForAssignment(container, DEFAULT_PARTITION_COUNT);
+		ContainerTestUtils.waitForAssignment(container, KafkaTopics.DEFAULT_PARTITION_COUNT);
 	}
 
 	@AfterEach

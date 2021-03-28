@@ -1,9 +1,9 @@
 package com.rbiedrawa.app.kafka.streams;
 
-import static com.rbiedrawa.app.kafka.config.KafkaConfiguration.TOPIC_ACCOUNT_EVENTS;
 import static org.assertj.core.api.Assertions.*;
 
 import com.rbiedrawa.app.kafka.AccountTestFactory;
+import com.rbiedrawa.app.kafka.config.KafkaTopics;
 import com.rbiedrawa.app.kafka.utils.TestSerdes;
 import com.rbiedrawa.app.kafka.utils.TopologyTestDriverFactory;
 import com.rbiedrawa.app.proto.accounts.Account;
@@ -31,7 +31,7 @@ class AccountKStreamTest {
 	void setup() {
 		testDriver = TopologyTestDriverFactory.create(sb -> new AccountKStream(accountSerde).accountAggregatorStream(sb));
 
-		accountInputTopic = testDriver.createInputTopic(TOPIC_ACCOUNT_EVENTS, keySerde.serializer(), accountSerde.serializer());
+		accountInputTopic = testDriver.createInputTopic(KafkaTopics.ACCOUNTS, keySerde.serializer(), accountSerde.serializer());
 		accountStateStore = testDriver.getKeyValueStore(AccountKStream.ACCOUNT_STORE);
 	}
 

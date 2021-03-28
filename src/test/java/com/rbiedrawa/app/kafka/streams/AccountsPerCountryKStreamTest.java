@@ -1,9 +1,9 @@
 package com.rbiedrawa.app.kafka.streams;
 
-import static com.rbiedrawa.app.kafka.config.KafkaConfiguration.TOPIC_ACCOUNT_EVENTS;
 import static org.assertj.core.api.Assertions.*;
 
 import com.rbiedrawa.app.kafka.AccountTestFactory;
+import com.rbiedrawa.app.kafka.config.KafkaTopics;
 import com.rbiedrawa.app.kafka.utils.TestSerdes;
 import com.rbiedrawa.app.kafka.utils.TopologyTestDriverFactory;
 import com.rbiedrawa.app.proto.accounts.Account;
@@ -23,7 +23,7 @@ class AccountsPerCountryKStreamTest {
 																   new AccountsPerCountryKStream(accountSerde).accountsPerCountryStream(streamsBuilder))) {
 
 			// Given
-			var accountInputTopic = testDriver.createInputTopic(TOPIC_ACCOUNT_EVENTS, keySerde.serializer(), accountSerde.serializer());
+			var accountInputTopic = testDriver.createInputTopic(KafkaTopics.ACCOUNTS, keySerde.serializer(), accountSerde.serializer());
 			var accountsPerCountryStore = testDriver.getKeyValueStore(AccountsPerCountryKStream.ACCOUNTS_PER_COUNTRY_STORE);
 
 

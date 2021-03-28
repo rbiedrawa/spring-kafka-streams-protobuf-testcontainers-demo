@@ -9,7 +9,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.rbiedrawa.app.kafka.config.KafkaConfiguration;
+import com.rbiedrawa.app.kafka.config.KafkaTopics;
 import com.rbiedrawa.app.proto.accounts.Account;
 import com.rbiedrawa.app.proto.accounts.AccountType;
 
@@ -29,7 +29,7 @@ public class FakeAccountProducer {
 	public void produceAccounts() {
 		IntStream.range(0, 5).forEach(value -> {
 			var account = randomAccount();
-			kafkaTemplate.send(KafkaConfiguration.TOPIC_ACCOUNT_EVENTS, account.getId(), account);
+			kafkaTemplate.send(KafkaTopics.ACCOUNTS, account.getId(), account);
 			log.info("----> Generated fake account {}", account);
 		});
 	}
