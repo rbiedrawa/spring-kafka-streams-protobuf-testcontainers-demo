@@ -6,7 +6,7 @@ This PoC was build for showcasing how to run **multiple Kafka Streams** instance
 
 ## Table of Content
 
-- [Patterns, technologies, concepts demonstrated here.](#patterns--technologies--concepts-demonstrated-here)
+- [Patterns, technologies and concepts demonstrated here.](#patterns--technologies-and-concepts-demonstrated-here)
 - [Architecture](#architecture)
 - [Getting Started](#getting-started)
     * [Prerequisite](#prerequisite)
@@ -19,7 +19,7 @@ This PoC was build for showcasing how to run **multiple Kafka Streams** instance
 - [References](#references)
 - [License](#license)
 
-## Patterns, technologies, concepts demonstrated here.
+## Patterns, technologies and concepts demonstrated here.
 
 * Testcontainers for Kafka streams integration tests.
 * Multiple KStreams inside single boot application.
