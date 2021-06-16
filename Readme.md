@@ -2,7 +2,7 @@
 
 Account Service - Spring, Kafka Streams sample application that allows users to Sign up and retrieve account details and statistics.
 
-This PoC was build for showcasing how to run **multiple Kafka Streams** instances (with different consumer groups) inside **single Spring Boot application**.
+This project demonstrates how to run **multiple Kafka Streams** instances (with different consumer groups) inside **single Spring Boot application**.
 
 ## Table of Content
 
