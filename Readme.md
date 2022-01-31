@@ -9,7 +9,7 @@ This project demonstrates how to run **multiple Kafka Streams** instances (with 
 - [Patterns, technologies and concepts demonstrated here.](#patterns--technologies-and-concepts-demonstrated-here)
 - [Architecture](#architecture)
 - [Getting Started](#getting-started)
-    * [Prerequisite](#prerequisite)
+    * [Prerequisites](#prerequisites)
     * [Installation](#installation)
         + [Local](#local)
     * [Usage](#usage)
@@ -42,7 +42,7 @@ This project demonstrates how to run **multiple Kafka Streams** instances (with 
 
 ## Getting Started
 
-### Prerequisite
+### Prerequisites
 
 * Java 11
 * Docker
