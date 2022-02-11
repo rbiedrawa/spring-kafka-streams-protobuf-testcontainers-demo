@@ -129,7 +129,7 @@ This project demonstrates how to run **multiple Kafka Streams** instances (with 
       ```    
     * Print topology diagram, visit https://zz85.github.io/kafka-streams-viz/ page.
 
-### Testing Kafka Stream
+### Testing Kafka Streams
 
 * Unit test (TopologyTestDriver) examples may be found under [src/test/](./src/test/java/com/rbiedrawa/app/kafka/streams).
 * Integration test (Testcontainers) examples may be found under [src/integrationTest/](./src/integrationTest/java/com/rbiedrawa/app).
