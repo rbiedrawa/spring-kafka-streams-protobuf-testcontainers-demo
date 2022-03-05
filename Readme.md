@@ -6,7 +6,7 @@ This project demonstrates how to run **multiple Kafka Streams** instances (with 
 
 ## Table of Content
 
-- [Patterns, technologies and concepts demonstrated here.](#patterns--technologies-and-concepts-demonstrated-here)
+- [Patterns, technologies and concepts demonstrated here](#patterns--technologies-and-concepts-demonstrated-here)
 - [Architecture](#architecture)
 - [Getting Started](#getting-started)
     * [Prerequisites](#prerequisites)
