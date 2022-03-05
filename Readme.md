@@ -19,7 +19,7 @@ This project demonstrates how to run **multiple Kafka Streams** instances (with 
 - [References](#references)
 - [License](#license)
 
-## Patterns, technologies and concepts demonstrated here.
+## Patterns, technologies and concepts demonstrated here
 
 * Testcontainers for Kafka streams integration tests.
 * Multiple KStreams inside single boot application.
@@ -30,7 +30,7 @@ This project demonstrates how to run **multiple Kafka Streams** instances (with 
 * Interactive queries (kafka state store integration).
 * Query endpoints for account details and statistics.
 * REST endpoints for printing kstream topology details.
-* Separating unit and integration test with gradle.
+* Separating unit and integration tests with gradle.
 * Docker, docker compose integration.
 * Custom gradle task for printing docker image name and sample docker-compose file.
 * Faker with scheduling setup for generating dummy data, activated by `dummy_data_gen` spring profile.
